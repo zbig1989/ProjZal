@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Fabryka2018.Models.Hale>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Dodaj", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("szukanaHala")
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hala_Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adres)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hala_Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adres)
+        </td>
+        <td>
+            @Html.ActionLink("Edycja", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Szczegoly", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Usun", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

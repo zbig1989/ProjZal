@@ -1,0 +1,64 @@
+﻿@model Fabryka2018.Models.Maszyny
+
+@{
+    ViewBag.Title = "Spis Maszyn - Usuwanie";
+}
+
+<h2>Spis Maszyn - Usuwanie</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Maszyny</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hale.Hala_Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hale.Hala_Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Maszyna_Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maszyna_Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numer_ewidencji)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numer_ewidencji)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_uruchomienia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_uruchomienia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HalaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HalaId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usun" class="btn btn-default" /> |
+            @Html.ActionLink("Powrot do listy", "Index")
+        </div>
+    }
+</div>

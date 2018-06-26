@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Fabryka2018.Models.Maszyny>
+
+@{
+    ViewBag.Title = "Spis Maszyn";
+}
+
+<h2>Spis Maszyn</h2>
+
+<p>
+    @Html.ActionLink("Dodaj", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("szukana maszyna")
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hale.Hala_Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Maszyna_Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Numer_ewidencji)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_uruchomienia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalaId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hale.Hala_Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Maszyna_Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numer_ewidencji)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_uruchomienia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalaId)
+        </td>
+        <td>
+            @Html.ActionLink("Edycja", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Szczegoly", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Usun", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

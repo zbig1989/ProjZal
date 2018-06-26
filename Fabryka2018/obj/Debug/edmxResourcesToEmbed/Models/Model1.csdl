@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="HaleSet" EntityType="Model1.Hale" />
+    <EntitySet Name="MaszynySet" EntityType="Model1.Maszyny" />
+    <EntitySet Name="OperatorzySet" EntityType="Model1.Operatorzy" />
+    <AssociationSet Name="HaleMaszyny" Association="Model1.HaleMaszyny">
+      <End Role="Hale" EntitySet="HaleSet" />
+      <End Role="Maszyny" EntitySet="MaszynySet" />
+    </AssociationSet>
+    <AssociationSet Name="MaszynyOperatorzy" Association="Model1.MaszynyOperatorzy">
+      <End Role="Maszyny" EntitySet="MaszynySet" />
+      <End Role="Operatorzy" EntitySet="OperatorzySet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Hale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Hala_Nazwa" Type="String" Nullable="false" />
+    <Property Name="Adres" Type="String" Nullable="true" />
+    <NavigationProperty Name="Maszyny" Relationship="Model1.HaleMaszyny" FromRole="Hale" ToRole="Maszyny" />
+  </EntityType>
+  <EntityType Name="Maszyny">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Maszyna_Nazwa" Type="String" Nullable="false" />
+    <Property Name="Numer_ewidencji" Type="Decimal" Nullable="true" />
+    <Property Name="Data_uruchomienia" Type="DateTime" Nullable="true" />
+    <Property Name="HalaId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Hale" Relationship="Model1.HaleMaszyny" FromRole="Maszyny" ToRole="Hale" />
+    <Property Name="HaleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Operatorzy" Relationship="Model1.MaszynyOperatorzy" FromRole="Maszyny" ToRole="Operatorzy" />
+  </EntityType>
+  <EntityType Name="Operatorzy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Imie" Type="String" Nullable="false" />
+    <Property Name="Nazwisko" Type="String" Nullable="false" />
+    <Property Name="Placa" Type="Double" Nullable="false" />
+    <Property Name="Data_zatrrudnienia" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="Maszyny" Relationship="Model1.MaszynyOperatorzy" FromRole="Operatorzy" ToRole="Maszyny" />
+  </EntityType>
+  <Association Name="HaleMaszyny">
+    <End Type="Model1.Hale" Role="Hale" Multiplicity="1" />
+    <End Type="Model1.Maszyny" Role="Maszyny" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hale">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Maszyny">
+        <PropertyRef Name="HaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MaszynyOperatorzy">
+    <End Type="Model1.Maszyny" Role="Maszyny" Multiplicity="*" />
+    <End Type="Model1.Operatorzy" Role="Operatorzy" Multiplicity="*" />
+  </Association>
+</Schema>

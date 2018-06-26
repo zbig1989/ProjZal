@@ -1,0 +1,58 @@
+﻿@model Fabryka2018.Models.Maszyny
+
+@{
+    ViewBag.Title = "Spis Maszyn - Szczegoly";
+}
+
+<h2>Spis Maszyn - Szczegoly</h2>
+
+<div>
+    <h4>Maszyny</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hale.Hala_Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hale.Hala_Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Maszyna_Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maszyna_Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numer_ewidencji)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numer_ewidencji)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_uruchomienia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_uruchomienia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HalaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HalaId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Powrot do listy", "Index")
+</p>

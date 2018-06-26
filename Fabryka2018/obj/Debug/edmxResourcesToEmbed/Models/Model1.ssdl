@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="HaleSet" EntityType="Model1.Store.HaleSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MaszynySet" EntityType="Model1.Store.MaszynySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OperatorzySet" EntityType="Model1.Store.OperatorzySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MaszynyOperatorzy" EntityType="Model1.Store.MaszynyOperatorzy" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="HaleMaszyny" Association="Model1.Store.HaleMaszyny">
+      <End Role="Hale" EntitySet="HaleSet" />
+      <End Role="Maszyny" EntitySet="MaszynySet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaszynyOperatorzy_Maszyny" Association="Model1.Store.FK_MaszynyOperatorzy_Maszyny">
+      <End Role="Maszyny" EntitySet="MaszynySet" />
+      <End Role="MaszynyOperatorzy" EntitySet="MaszynyOperatorzy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaszynyOperatorzy_Operatorzy" Association="Model1.Store.FK_MaszynyOperatorzy_Operatorzy">
+      <End Role="Operatorzy" EntitySet="OperatorzySet" />
+      <End Role="MaszynyOperatorzy" EntitySet="MaszynyOperatorzy" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="HaleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hala_Nazwa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adres" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MaszynySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Maszyna_Nazwa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Numer_ewidencji" Type="decimal" Nullable="true" />
+    <Property Name="Data_uruchomienia" Type="datetime" Nullable="true" />
+    <Property Name="HalaId" Type="int" Nullable="false" />
+    <Property Name="HaleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OperatorzySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Imie" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nazwisko" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Placa" Type="float" Nullable="false" />
+    <Property Name="Data_zatrrudnienia" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MaszynyOperatorzy">
+    <Key>
+      <PropertyRef Name="Maszyny_Id" />
+      <PropertyRef Name="Operatorzy_Id" />
+    </Key>
+    <Property Name="Maszyny_Id" Type="int" Nullable="false" />
+    <Property Name="Operatorzy_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="HaleMaszyny">
+    <End Role="Hale" Type="Model1.Store.HaleSet" Multiplicity="1" />
+    <End Role="Maszyny" Type="Model1.Store.MaszynySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hale">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Maszyny">
+        <PropertyRef Name="HaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaszynyOperatorzy_Maszyny">
+    <End Role="Maszyny" Type="Model1.Store.MaszynySet" Multiplicity="1" />
+    <End Role="MaszynyOperatorzy" Type="Model1.Store.MaszynyOperatorzy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Maszyny">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MaszynyOperatorzy">
+        <PropertyRef Name="Maszyny_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaszynyOperatorzy_Operatorzy">
+    <End Role="MaszynyOperatorzy" Type="Model1.Store.MaszynyOperatorzy" Multiplicity="*" />
+    <End Role="Operatorzy" Type="Model1.Store.OperatorzySet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Operatorzy">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MaszynyOperatorzy">
+        <PropertyRef Name="Operatorzy_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

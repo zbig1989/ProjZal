@@ -1,0 +1,50 @@
+﻿@model Fabryka2018.Models.Operatorzy
+
+@{
+    ViewBag.Title = "Spis Operatorow - Szczegoly";
+}
+
+<h2>Spis Operatorow - Szczegoly</h2>
+
+<div>
+    <h4>Operatorzy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Placa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Placa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_zatrrudnienia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_zatrrudnienia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Powrot do listy", "Index")
+</p>
